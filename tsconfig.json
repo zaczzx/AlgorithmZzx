@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "amd",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "lib": ["ES6", "DOM"],
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "baseUrl": "./",
+    "strict": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@/*": ["常规面试题/*"],
+      "@@/*": ["常规面试题/.umi/*"],
+    },
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "mock/**/*",
+    "常规面试题/**/*",
+    "config/**/*",
+    "typings.d.ts",
+    ".umirc.ts"
+  ],
+  "exclude": [
+    "node_modules",
+  ]
+}
