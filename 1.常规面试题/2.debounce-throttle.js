@@ -64,3 +64,21 @@ let ttimer = setInterval(() => {
   tlog();
   tcount++;
 }, 100);
+
+// 防抖 + 节流
+function debthrottle(fn, wait_t = 1000) {
+	let prev = 0, timer = null;
+	const throttled = () => {
+		let now = new Date();
+		if (now - prev < delay) {
+			clearTimeout(timer);
+			setTimeout(() => {
+				prev = now;
+				fn.apply(this, args);
+			}, wait_t);
+		} else {
+			fn.apply(this, args);
+			prev = now;
+		}
+	}
+}
