@@ -9,6 +9,11 @@ function sleep(time) {
   })
 }
 
-// memo
-// https://vue3js.cn/interview/JavaScript/function_cache.html#%E4%B8%80%E3%80%81%E6%98%AF%E4%BB%80%E4%B9%88
-// https://juejin.cn/post/6844903885379731464
+// setTimout 实现 setInterval
+function myInterval(fn, time) {
+  let context = this;
+  setTimeout(() => {
+    fn.call(context);
+    myInterval(fn, time);
+  }, time);
+}

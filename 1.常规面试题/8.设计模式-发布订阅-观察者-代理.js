@@ -45,7 +45,6 @@ class EventEmitter {
   }
 }
 
-// test EventEmitter
 function testEventEmitter() {
   let eventBus = new EventEmitter();
   const task1 = () => {
@@ -105,7 +104,6 @@ class Observer {
   }
 }
 
-// test SubOb
 function testSubOb() {
   let student = new Subject('学生');
   let parent = new Observer('父母');
@@ -117,3 +115,37 @@ function testSubOb() {
   student.setState('得了 100 分');  
 }
 testSubOb();
+
+// 代理人模式, Proxy
+function MyProxy(obj, handler) {
+  console.log(handler);
+  let _target = deepClone(obj);
+  Object.keys(_target).forEach(key => {
+    Object.defineProperty(_target, key, {
+      get: () => handler.get && handler.get(obj, key),
+      set: newVal => handler.set && handler.set(obj, key, newVal),
+    });
+  });
+  return _target;
+}
+
+function testProxy(){
+  let person = {
+    name: 'jack',
+    city: 'Beijing',
+  };
+  
+  let proxy = new MyProxy(person, {
+    get: (target, propKey) => target[propKey],
+    set: (target, propKey, value) => {
+      target[propKey] = value;
+    },
+  });
+  
+  // test
+  console.log(proxy.name); // jack
+  proxy.city = 'Nanjing'; 
+  console.log(proxy.city);  // Nanjing
+  console.log(person); // { name: 'jack', city: 'Nanjing' }
+}
+testProxy();
